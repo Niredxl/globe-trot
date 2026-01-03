@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/user_profile.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="wireframe-container">
+
+    <!-- Header -->
+    <div class="top-bar attached">
+        <span class="brand">GlobalTrotter</span>
+        <span class="profile-circle"></span>
+    </div>
+
+    <!-- Body -->
+    <div class="container-body">
+
+        <!-- User Info -->
+        <div class="user-info">
+
+            <!-- Avatar -->
+            <div class="user-avatar">
+                User
+            </div>
+
+            <!-- User Details -->
+            <div class="user-details-box">
+
+                <h6 class="section-title">User Details</h6>
+
+                <div class="details-grid">
+                    <div><strong>Full Name:</strong> Your Name</div>
+                    <div><strong>Email:</strong> Your Email</div>
+                    <div><strong>Phone No:</strong> Your Phone no</div>
+                    <div><strong>City:</strong> Your City</div>
+                    <div><strong>Country:</strong> Your Country</div>
+                </div>
+
+                <div class="bio-section">
+                    <strong>Bio:</strong>
+                    <p>
+                        Your Bio
+                    </p>
+                </div>
+
+                <!-- Edit Button BELOW details -->
+                <div class="edit-section">
+                    <button class="edit-btn">Edit</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Preplanned Trips -->
+        <div class="trip-section">
+            <h6 class="section-title">Preplanned Trips</h6>
+
+            <div class="trip-grid">
+                <div class="trip-tile"><button>View</button></div>
+                <div class="trip-tile"><button>View</button></div>
+                <div class="trip-tile"><button>View</button></div>
+            </div>
+        </div>
+
+        <!-- Previous Trips -->
+        <div class="trip-section">
+            <h6 class="section-title">Previous Trips</h6>
+
+            <div class="trip-grid">
+                <div class="trip-tile"><button>View</button></div>
+                <div class="trip-tile"><button>View</button></div>
+                <div class="trip-tile"><button>View</button></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

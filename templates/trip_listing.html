@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/trip_listing.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="wireframe-container">
+
+    <div class="top-bar attached">
+        <span class="brand">GlobalTrotter</span>
+        <span class="profile-circle"></span>
+    </div>
+
+
+    <div class="container-body">
+
+        <div class="controls">
+            <input type="text" class="search-bar" placeholder="Search bar .....">
+
+            <div class="control-buttons">
+                <button>Group by</button>
+                <button>Filter</button>
+                <button>Sort by...</button>
+            </div>
+        </div>
+
+        <div class="trip-group">
+            <h6 class="group-title">Ongoing</h6>
+
+            <div class="trip-card">
+                Short Over View of the Trip
+            </div>
+        </div>
+
+        <div class="trip-group">
+            <h6 class="group-title">Up-coming</h6>
+
+            <div class="trip-card">
+                Short Over View of the Trip
+            </div>
+        </div>
+
+        <div class="trip-group">
+            <h6 class="group-title">Completed</h6>
+
+            <div class="trip-card">
+                Short Over View of the Trip
+            </div>
+
+            <div class="trip-card">
+                Short Over View of the Trip
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
