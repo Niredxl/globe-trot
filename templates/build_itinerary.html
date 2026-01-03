@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/build_itinerary.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="wireframe-container">
+
+    <div class="top-bar attached">
+        <span class="brand">GlobalTrotter</span>
+        <span class="profile-circle"></span>
+    </div>
+
+    <div class="container-body">
+
+        <div class="itinerary-section">
+            <h6 class="section-title">Section 1:</h6>
+
+            <textarea class="section-desc-input"
+                placeholder="Enter details about this section (travel, hotel, activity, notes, etc.)"></textarea>
+
+            <div class="section-row">
+                <div class="date-range">
+                    <input type="date" name="start_date[]">
+                    <span class="date-separator">to</span>
+                    <input type="date" name="end_date[]">
+                </div>
+
+                <input type="text" name="budget[]" placeholder="Budget of this section">
+            </div>
+        </div>
+
+        <div class="itinerary-section">
+            <h6 class="section-title">Section 2:</h6>
+
+            <textarea class="section-desc-input"
+                placeholder="Enter details about this section (travel, hotel, activity, notes, etc.)"></textarea>
+
+            <div class="section-row">
+                <div class="date-range">
+                    <input type="date" name="start_date[]">
+                    <span class="date-separator">to</span>
+                    <input type="date" name="end_date[]">
+                </div>
+
+                <input type="text" name="budget[]" placeholder="Budget of this section">
+            </div>
+        </div>
+
+        <div class="itinerary-section">
+            <h6 class="section-title">Section 3:</h6>
+
+            <textarea class="section-desc-input"
+                placeholder="Enter details about this section (travel, hotel, activity, notes, etc.)"></textarea>
+
+            <div class="section-row">
+                <div class="date-range">
+                    <input type="date" name="start_date[]">
+                    <span class="date-separator">to</span>
+                    <input type="date" name="end_date[]">
+                </div>
+
+                <input type="text" name="budget[]" placeholder="Budget of this section">
+            </div>
+        </div>
+
+        <div class="add-section">
+            <button type="button" class="add-btn">＋ Add another Section</button>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

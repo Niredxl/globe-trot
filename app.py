@@ -14,5 +14,9 @@ def login():
 def create_trip():
     return render_template('create_trip.html')
 
+@app.route('/builditinerary')
+def build_itinerary():
+    return render_template('build_itinerary.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
