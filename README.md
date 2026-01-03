@@ -33,7 +33,7 @@ Run the application locally:
 flask run
 ```
 
-Access the app at `http://127.0.0.1:5000`.
+Access the app at `https://globe-trot.onrender.com/`.
 
 ## Deployment
 
