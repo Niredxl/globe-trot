@@ -146,5 +146,9 @@ def create_trip():
 def build_itinerary():
     return render_template('build_itinerary.html')
 
+@app.route('/triplisting')
+def trip_listing():
+    return render_template('trip_listing.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
