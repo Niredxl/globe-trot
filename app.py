@@ -149,5 +149,17 @@ def build_itinerary():
 def trip_listing():
     return render_template('trip_listing.html')
 
+@app.route('/search')
+def activity_search():
+    return render_template('activity_search.html')
+
+@app.route('/itineraryview')
+def itinerary_view():
+    return render_template('itinerary_view.html')
+
+@app.route('/communitytab')
+def community_tab():
+    return render_template('community_tab.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
