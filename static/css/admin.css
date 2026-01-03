@@ -1,0 +1,208 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Patrick Hand', cursive;
+}
+
+body {
+    background: radial-gradient(circle at top, #2b2b2b, #0e0e0e);
+    color: #ffffff;
+}
+
+/*Layout*/
+.admin-wrapper {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 30px auto;
+}
+
+/*Main Container*/
+.wireframe-container {
+    flex: 3;
+}
+
+/*Header*/
+.top-bar.attached {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 18px 14px;
+    border: 2px solid #ffffff;
+    border-bottom: none;
+    border-radius: 16px 16px 0 0;
+}
+
+.top-bar.attached::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: #ffffff;
+}
+
+.brand {
+    font-size: 18px;
+}
+
+.profile-circle {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+}
+
+/*Body*/
+.container-body {
+    border: 2px solid #ffffff;
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    padding: 22px;
+}
+
+/*Search Controls*/
+.search-controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.search-input {
+    flex: 1;
+    background: transparent;
+    border: 2px solid #ffffff;
+    border-radius: 12px;
+    padding: 8px 14px;
+    color: #ffffff;
+}
+
+.control-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.control-buttons button {
+    background: transparent;
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+    padding: 6px 12px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.control-buttons button:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/*Admin Tabs*/
+.admin-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.admin-tabs button {
+    background: transparent;
+    border: 2px solid #ffffff;
+    border-radius: 12px;
+    padding: 6px 14px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.admin-tabs button.active {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+/*Admin Sections*/
+.admin-section {
+    display: none;
+    margin-top: 16px;
+}
+
+.admin-section.active {
+    display: block;
+}
+
+/*Manage Users*/
+.data-row {
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/*Popular Cities / Activities*/
+.metric-card {
+    border: 2px solid #ffffff;
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 12px;
+}
+
+/*Analytics (WITH COLOR)*/
+
+/* Charts wrapper */
+.chart-placeholder {
+    position: relative;
+    height: 90px;
+    border: 2px solid #ffffff;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    overflow: hidden;
+}
+
+/* Pie Chart */
+.chart-placeholder.pie {
+    border-radius: 50%;
+    background:
+        conic-gradient(
+            #4aa3c7 0deg 210deg,
+            #7cc957 210deg 300deg,
+            rgba(255,255,255,0.15) 300deg 360deg
+        );
+}
+
+/* Line Chart */
+.chart-placeholder.line::before {
+    content: "";
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    top: 50%;
+    height: 2px;
+    background: #e05858;
+}
+
+.chart-placeholder.line::after {
+    content: "●   ●   ●   ●";
+    position: absolute;
+    top: 42%;
+    left: 10%;
+    color: #e05858;
+    font-size: 18px;
+    letter-spacing: 28px;
+}
+
+/* Bar Chart */
+.chart-placeholder.bar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+.chart-placeholder.bar .bar {
+    width: 18%;
+    background: #ffa45b;
+    border-radius: 6px;
+}
+
+.bar.small { height: 40%; }
+.bar.medium { height: 60%; }
+.bar.large { height: 80%; }
+

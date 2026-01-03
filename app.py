@@ -161,5 +161,13 @@ def itinerary_view():
 def community_tab():
     return render_template('community_tab.html')
 
+@app.route('/calendar')
+def calendar():
+    return render_template('calendar.html')
+
+@app.route('/admin')
+def admin():
+    return render_template('admin.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
