@@ -1,0 +1,11 @@
+#suggestions {
+    top: 100%;
+    left: 0;
+    z-index: 1050; /* Higher than cards and inputs */
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+#suggestions .list-group-item:hover {
+    background-color: #f1f1f1;
+}
