@@ -222,7 +222,25 @@ def signup():
 @app.route('/')
 def home():
     if 'user_id' in session:
-        return render_template('home.html')
+        conn = get_db()
+        rows = conn.execute("""
+            SELECT t.*, COUNT(s.id) as stop_count 
+            FROM trips t 
+            LEFT JOIN itinerary_stops s ON t.id = s.trip_id 
+            WHERE t.user_id = ? 
+            GROUP BY t.id
+            ORDER BY t.start_date DESC
+        """, (session['user_id'],)).fetchall()
+        
+        trips = []
+        for trip in rows:
+            trip_data = dict(trip)
+            images = LOCATION_IMAGES.get(trip["location"], ["default1.jpg", "default2.jpg", "default3.jpg"])
+            trip_data["image"] = random.choice(images)
+            trips.append(trip_data)
+        conn.close()
+        
+        return render_template('home.html', trips=trips)
     return redirect(url_for('login'))
 
 @app.route('/register')
@@ -348,8 +366,15 @@ def user_profile():
     user = conn.execute("SELECT * FROM users WHERE id = ?", (session['user_id'],)).fetchone()
     
     # Fetch trips for stats
-    trips = conn.execute("SELECT * FROM trips WHERE user_id = ? ORDER BY start_date DESC", (session['user_id'],)).fetchall()
+    rows = conn.execute("SELECT * FROM trips WHERE user_id = ? ORDER BY start_date DESC", (session['user_id'],)).fetchall()
     conn.close()
+
+    trips = []
+    for trip in rows:
+        trip_data = dict(trip)
+        images = LOCATION_IMAGES.get(trip["location"], ["default1.jpg", "default2.jpg", "default3.jpg"])
+        trip_data["image"] = random.choice(images)
+        trips.append(trip_data)
     
     return render_template('user_profile.html', user=user, trips=trips)
 
@@ -536,5 +561,21 @@ def admin():
     conn.close()
     return render_template('admin.html', user_count=user_count, trip_count=trip_count, recent_trips=recent_trips)
 
+@app.route('/trip/<int:trip_id>/delete', methods=['POST'])
+def delete_trip(trip_id):
+    if 'user_id' not in session: return redirect(url_for('login'))
+    
+    conn = get_db()
+    # Verify owner
+    trip = conn.execute("SELECT user_id FROM trips WHERE id = ?", (trip_id,)).fetchone()
+    if trip and trip['user_id'] == session['user_id']:
+        # Delete dependencies
+        conn.execute("DELETE FROM trip_activities WHERE stop_id IN (SELECT id FROM itinerary_stops WHERE trip_id = ?)", (trip_id,))
+        conn.execute("DELETE FROM itinerary_stops WHERE trip_id = ?", (trip_id,))
+        conn.execute("DELETE FROM trips WHERE id = ?", (trip_id,))
+        conn.commit()
+    conn.close()
+    
+    return redirect(url_for('trip_listing'))
 if __name__ == '__main__':
     app.run(debug=True)

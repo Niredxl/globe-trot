@@ -2,7 +2,8 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Patrick Hand', cursive;
+    /* font-family: 'Patrick Hand', cursive; */
+
 }
 
 body {
@@ -160,11 +161,9 @@ body {
 .chart-placeholder.pie {
     border-radius: 50%;
     background:
-        conic-gradient(
-            #4aa3c7 0deg 210deg,
+        conic-gradient(#4aa3c7 0deg 210deg,
             #7cc957 210deg 300deg,
-            rgba(255,255,255,0.15) 300deg 360deg
-        );
+            rgba(255, 255, 255, 0.15) 300deg 360deg);
 }
 
 /* Line Chart */
@@ -202,7 +201,14 @@ body {
     border-radius: 6px;
 }
 
-.bar.small { height: 40%; }
-.bar.medium { height: 60%; }
-.bar.large { height: 80%; }
+.bar.small {
+    height: 40%;
+}
 
+.bar.medium {
+    height: 60%;
+}
+
+.bar.large {
+    height: 80%;
+}
