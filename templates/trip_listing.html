@@ -4,9 +4,10 @@
 <div class="container mt-5 mb-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="fw-bold">My Trips</h2>
-        <a href="#" class="btn btn-primary rounded-pill px-4 shadow-sm">
-            <i class="bi bi-plus-lg"></i> Plan New Trip
-        </a>
+        <a href="{{ url_for('create_trip') }}"
+   class="btn btn-primary rounded-pill px-4 shadow-sm">
+    <i class="bi bi-plus-lg"></i> Plan New Trip
+</a>
     </div>
 
     <div class="row g-3 mb-5 p-4 bg-white shadow-sm rounded-4">
@@ -14,7 +15,7 @@
             <div class="input-group">
                 <span class="input-group-text bg-white border-end-0"><i class="bi bi-search"></i></span>
                 <input type="text" class="form-control border-start-0 ps-0" placeholder="Search your trips...">
-            </div>
+            </div> 
         </div>
         <div class="col-6 col-md-2">
             <select class="form-select border-0 bg-light"><option>Group by</option></select>
@@ -27,54 +28,72 @@
         </div>
     </div>
 
-    <!-- {% set categories = [
-        {'title': 'Ongoing', 'list': ongoing_trips},
-        {'title': 'Upcoming', 'list': upcoming_trips},
-        {'title': 'Completed', 'list': completed_trips}
-    ] %}
+   {% set categories = [
+    ('Ongoing Trips', ongoing_trips),
+    ('Upcoming Trips', upcoming_trips),
+    ('Completed Trips', completed_trips)
+] %}
 
-    {% for category in categories %} -->
-    <section class="mb-5">
-        <h5 class="fw-bold border-bottom pb-2 mb-4">category name </h5>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
-            <!-- {% if category.list %}
-                {% for trip in category.list %} -->
-                <div class="col">
-                    <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden trip-card">
-                        <div class="ratio ratio-16x9">
-                            <img src="#" 
-                                 class="card-img-top" alt="#" style="object-fit: cover;">
+{% for title, trips in categories %}
+<section class="mb-5">
+    <h5 class="fw-bold border-bottom pb-2 mb-4">{{ title }}</h5>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+        {% if trips %}
+            {% for trip in trips %}
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden trip-card">
+                    
+                    <div class="ratio ratio-16x9">
+                        <img src="{{ url_for('static', filename='img/' ~ trip.image) }}"
+                             class="card-img-top"
+                             style="object-fit: cover;">
+                    </div>
+
+                    <div class="card-body p-4">
+                        <h5 class="card-title fw-bold mb-1">
+                            {{ trip.location }}
+                        </h5>
+
+                        <p class="text-muted small mb-3">
+                            <i class="bi bi-calendar3 me-1"></i>
+                            {{ trip.start_date }} – {{ trip.end_date }}
+                        </p>
+
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge bg-light text-dark border rounded-pill px-3">
+                                {{ trip.stop_count }} stops
+                            </span>
                         </div>
-                        <div class="card-body p-4">
-                            <h5 class="card-title fw-bold mb-1">trip name</h5>
-                            <p class="text-muted small mb-3">
-                                <i class="bi bi-calendar3 me-1"></i> trip start date - trip end date
-                            </p>
-                            
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="badge bg-light text-dark border rounded-pill px-3">
-                                   number of stops
-                                </span>
-                            </div>
 
-                            <div class="d-flex gap-2">
-                                <a href="#" class="btn btn-outline-primary btn-sm rounded-pill flex-grow-1">View</a>
-                                <a href="#" class="btn btn-outline-secondary btn-sm rounded-pill"><i class="bi bi-pencil"></i></a>
-                                <button type="button" class="btn btn-outline-danger btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </div>
+                        <div class="d-flex gap-2">
+                            <a href="{{ url_for('build_itinerary', trip_id=trip.id) }}"
+                               class="btn btn-outline-primary btn-sm rounded-pill flex-grow-1">
+                                View
+                            </a>
+
+                            <a href="#"
+                               class="btn btn-outline-secondary btn-sm rounded-pill">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+
+                            <button type="button"
+                                    class="btn btn-outline-danger btn-sm rounded-pill">
+                                <i class="bi bi-trash"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
-            {% else %}
-                <div class="col-12">
-                    <p class="text-muted small italic">No {{ category.title.lower() }} trips found.</p>
-                </div>
-            {% endif %}
-        </div>
-    </section>
-    {% endfor %}
-</div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <p class="text-muted small italic">
+                    No {{ title.lower() }} found.
+                </p>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endfor %}
 {% endblock %}

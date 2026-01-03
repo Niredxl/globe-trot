@@ -1,7 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
+import random
+from datetime import date, datetime
 import sqlite3, os
+
+LOCATION_IMAGES = {
+    "Paris, France": ["paris1.jpg", "paris2.jpg", "paris3.jpg"],
+    "Tokyo, Japan": ["tokyo1.jpg", "tokyo2.jpg", "tokyo3.jpg"],
+    "New York, USA": ["ny1.jpg", "ny2.jpg", "ny3.jpg"],
+}
 
 app = Flask(__name__)
 app.secret_key = "hello-there"
@@ -254,7 +262,55 @@ def user_profile():
 
 @app.route('/triplisting')
 def trip_listing():
-    return render_template('trip_listing.html')
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    user_id = session['user_id']
+    today = date.today()
+
+    conn = get_db()
+    rows = conn.execute("""
+        SELECT 
+            t.id,
+            t.location,
+            t.start_date,
+            t.end_date,
+            COUNT(s.id) AS stop_count
+        FROM trips t
+        LEFT JOIN itinerary_stops s ON t.id = s.trip_id
+        WHERE t.user_id = ?
+        GROUP BY t.id
+        ORDER BY t.start_date ASC
+    """, (user_id,)).fetchall()
+    conn.close()
+
+    ongoing, upcoming, completed = [], [], []
+
+    for trip in rows:
+        start = datetime.strptime(trip["start_date"], "%Y-%m-%d").date()
+        end = datetime.strptime(trip["end_date"], "%Y-%m-%d").date()
+
+        images = LOCATION_IMAGES.get(
+            trip["location"],
+            ["default1.jpg", "default2.jpg", "default3.jpg"]
+        )
+
+        trip_data = dict(trip)
+        trip_data["image"] = random.choice(images)
+
+        if start <= today <= end:
+            ongoing.append(trip_data)
+        elif start > today:
+            upcoming.append(trip_data)
+        else:
+            completed.append(trip_data)
+
+    return render_template(
+        "trip_listing.html",
+        ongoing_trips=ongoing,
+        upcoming_trips=upcoming,
+        completed_trips=completed
+    )
 
 @app.route('/search')
 def activity_search():
