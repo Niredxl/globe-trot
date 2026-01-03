@@ -1,0 +1,100 @@
+.wireframe-container {
+    background-color: #181717;
+    color: #ffffff;
+    border: 1px solid #555;
+    border-radius: 12px;
+    padding: 20px;
+    font-family: 'Patrick Hand',cursive;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #555;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.brand {
+    font-weight: bold;
+}
+
+.profile-circle {
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+}
+
+.section {
+    border: 1px solid #555;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 14px;
+    border-bottom: 1px solid #555;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.form-row label {
+    width: 140px;
+    font-size: 14px;
+}
+
+.form-row input {
+    flex: 1;
+    background: transparent;
+    border: 1px solid #777;
+    color: #fff;
+    padding: 6px 8px;
+    border-radius: 4px;
+}
+
+.form-row input:focus {
+    outline: none;
+    border-color: #aaa;
+}
+
+.suggestion-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.suggestion-box {
+    height: 140px;
+    border: 1px solid #777;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+.form-actions {
+    text-align: right;
+    margin-top: 15px;
+}
+
+.save-btn {
+    font-family: 'Patrick Hand', cursive;
+    padding: 8px 18px;
+    border: 2px solid #fff;
+    background: transparent;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.save-btn:hover {
+    background: #fff;
+    color: #000;
+}
