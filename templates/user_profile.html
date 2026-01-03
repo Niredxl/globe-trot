@@ -20,60 +20,57 @@
 
         <!-- User Info -->
         <div class="user-info">
-
             <!-- Avatar -->
             <div class="user-avatar">
-                User
+                {% if user.photo %}
+                <img src="{{ url_for('static', filename='uploads/' + user.photo) }}" alt="Avatar"
+                    style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+                {% else %}
+                <i class="bi bi-person-fill" style="font-size: 3rem; color: #fff;"></i>
+                {% endif %}
             </div>
 
             <!-- User Details -->
             <div class="user-details-box">
-
                 <h6 class="section-title">User Details</h6>
-
                 <div class="details-grid">
-                    <div><strong>Full Name:</strong> Your Name</div>
-                    <div><strong>Email:</strong> Your Email</div>
-                    <div><strong>Phone No:</strong> Your Phone no</div>
-                    <div><strong>City:</strong> Your City</div>
-                    <div><strong>Country:</strong> Your Country</div>
+                    <div><strong>Full Name:</strong> {{ user.first_name }} {{ user.last_name }}</div>
+                    <div><strong>Email:</strong> {{ user.email }}</div>
+                    <div><strong>Phone No:</strong> {{ user.phone or 'Not provided' }}</div>
+                    <div><strong>City:</strong> {{ user.city or 'Not provided' }}</div>
+                    <div><strong>Country:</strong> {{ user.country or 'Not provided' }}</div>
                 </div>
 
                 <div class="bio-section">
                     <strong>Bio:</strong>
-                    <p>
-                        Your Bio
-                    </p>
+                    <p>{{ user.bio or 'No bio added yet.' }}</p>
                 </div>
 
                 <!-- Edit Button BELOW details -->
                 <div class="edit-section">
-                    <button class="edit-btn">Edit</button>
+                    <button class="edit-btn">Edit Profile</button>
                 </div>
-
             </div>
         </div>
 
-        <!-- Preplanned Trips -->
+        <!-- Trips -->
         <div class="trip-section">
-            <h6 class="section-title">Preplanned Trips</h6>
-
+            <h6 class="section-title">My Trips</h6>
+            {% if trips %}
             <div class="trip-grid">
-                <div class="trip-tile"><button>View</button></div>
-                <div class="trip-tile"><button>View</button></div>
-                <div class="trip-tile"><button>View</button></div>
+                {% for trip in trips %}
+                <div class="trip-tile"
+                    style="background: white; padding: 10px; border-radius: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                    <div style="font-weight: bold; margin-bottom: 5px;">{{ trip.location }}</div>
+                    <div style="font-size: 0.8rem; color: gray; margin-bottom: 10px;">{{ trip.start_date }}</div>
+                    <a href="{{ url_for('build_itinerary', trip_id=trip.id) }}"
+                        style="text-decoration: none; background: #007bff; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem;">View</a>
+                </div>
+                {% endfor %}
             </div>
-        </div>
-
-        <!-- Previous Trips -->
-        <div class="trip-section">
-            <h6 class="section-title">Previous Trips</h6>
-
-            <div class="trip-grid">
-                <div class="trip-tile"><button>View</button></div>
-                <div class="trip-tile"><button>View</button></div>
-                <div class="trip-tile"><button>View</button></div>
-            </div>
+            {% else %}
+            <p>No trips planned yet.</p>
+            {% endif %}
         </div>
 
     </div>
