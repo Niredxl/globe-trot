@@ -1,0 +1,133 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Patrick Hand', cursive;
+}
+
+body {
+    background: radial-gradient(circle at top, #2b2b2b, #0e0e0e);
+    color: #ffffff;
+}
+
+/*Two Column Layout*/
+.community-wrapper {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 30px auto;
+}
+
+/*Main Container*/
+.wireframe-container {
+    flex: 3;
+}
+
+/*Header*/
+.top-bar.attached {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 18px 14px;
+    border: 2px solid #ffffff;
+    border-bottom: none;
+    border-radius: 16px 16px 0 0;
+}
+
+.top-bar.attached::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: #ffffff;
+}
+
+.brand {
+    font-size: 18px;
+}
+
+.profile-circle {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+}
+
+/*Body*/
+.container-body {
+    border: 2px solid #ffffff;
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    padding: 22px;
+}
+
+/*Search Controls*/
+.search-controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.search-input {
+    flex: 1;
+    background: transparent;
+    border: 2px solid #ffffff;
+    border-radius: 12px;
+    padding: 8px 14px;
+    color: #ffffff;
+}
+
+.control-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.control-buttons button {
+    background: transparent;
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+    padding: 6px 12px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.control-buttons button:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/*Community Feed*/
+.section-title {
+    text-align: center;
+    margin-bottom: 14px;
+}
+
+.community-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.post-row {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+}
+
+/*User Avatar*/
+.user-circle {
+    width: 42px;
+    height: 42px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+}
+
+/* Post Card */
+.post-card {
+    flex: 1;
+    height: 90px;
+    border: 2px solid #ffffff;
+    border-radius: 14px;
+}

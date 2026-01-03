@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/calendar.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="wireframe-container">
+
+    <!-- Header -->
+    <div class="top-bar attached">
+        <span class="brand">GlobalTrotter</span>
+        <span class="profile-circle"></span>
+    </div>
+
+    <!-- Body -->
+    <div class="container-body">
+
+        <!-- Search Controls -->
+        <div class="search-controls">
+            <input type="text" class="search-input" placeholder="Search bar .....">
+
+            <div class="control-buttons">
+                <button>Group by</button>
+                <button>Filter</button>
+                <button>Sort by...</button>
+            </div>
+        </div>
+
+        <!-- Page Title -->
+        <h4 class="page-title">Calendar View</h4>
+
+        <!-- Calendar -->
+        <div class="calendar-container">
+
+            <!-- Month Navigation -->
+            <div class="calendar-header">
+                <span class="nav-arrow">←</span>
+                <span class="month-title">January 2024</span>
+                <span class="nav-arrow">→</span>
+            </div>
+
+            <!-- Weekdays -->
+            <div class="calendar-weekdays">
+                <div>SUN</div>
+                <div>MON</div>
+                <div>TUE</div>
+                <div>WED</div>
+                <div>THU</div>
+                <div>FRI</div>
+                <div>SAT</div>
+            </div>
+
+            <!-- Calendar Grid -->
+            <div class="calendar-grid">
+
+                <!-- Empty cells before month start -->
+                <div class="day-cell empty"></div>
+                <div class="day-cell empty"></div>
+                <div class="day-cell empty"></div>
+
+                <!-- Week 1 -->
+                <div class="day-cell"><span class="date">1</span></div>
+                <div class="day-cell"><span class="date">2</span></div>
+                <div class="day-cell"><span class="date">3</span></div>
+                <div class="day-cell"><span class="date">4</span></div>
+
+                <!-- Week 2 -->
+                <div class="day-cell"><span class="date">5</span></div>
+                <div class="day-cell"><span class="date">6</span></div>
+                <div class="day-cell"><span class="date">7</span></div>
+                <div class="day-cell">
+                    <span class="date">8</span>
+                    <span class="event">PARIS TRIP</span>
+                </div>
+                <div class="day-cell"><span class="date">9</span></div>
+                <div class="day-cell"><span class="date">10</span></div>
+                <div class="day-cell"><span class="date">11</span></div>
+
+                <!-- Week 3 -->
+                <div class="day-cell"><span class="date">12</span></div>
+                <div class="day-cell"><span class="date">13</span></div>
+                <div class="day-cell"><span class="date">14</span></div>
+                <div class="day-cell highlight">
+                    <span class="date">15</span>
+                    <span class="event">NYC – GETAWAY</span>
+                </div>
+                <div class="day-cell"><span class="date">16</span></div>
+                <div class="day-cell"><span class="date">17</span></div>
+                <div class="day-cell"><span class="date">18</span></div>
+
+                <!-- Week 4 -->
+                <div class="day-cell">
+                    <span class="date">19</span>
+                    <span class="event">JAPAN ADVENTURE</span>
+                </div>
+                <div class="day-cell"><span class="date">20</span></div>
+                <div class="day-cell"><span class="date">21</span></div>
+                <div class="day-cell"><span class="date">22</span></div>
+                <div class="day-cell"><span class="date">23</span></div>
+                <div class="day-cell"><span class="date">24</span></div>
+                <div class="day-cell highlight">
+                    <span class="date">25</span>
+                    <span class="event">NYC GETAWAY</span>
+                </div>
+
+                <!-- Week 5 -->
+                <div class="day-cell"><span class="date">26</span></div>
+                <div class="day-cell"><span class="date">27</span></div>
+                <div class="day-cell"><span class="date">28</span></div>
+                <div class="day-cell"><span class="date">29</span></div>
+                <div class="day-cell"><span class="date">30</span></div>
+                <div class="day-cell"><span class="date">31</span></div>
+                <div class="day-cell empty"></div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
