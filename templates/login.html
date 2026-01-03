@@ -7,7 +7,7 @@
     <img src="{{ url_for('static', filename='img/user.png') }}" class="profile-pic">
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Email address</label>
-        <input name="username" type="text" class="form-control" id="exampleFormControlInput1" placeholder="username">
+        <input name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="email">
     </div>
     <div class="password">
             <label for="inputPassword5" class="form-label">Password</label>
@@ -15,7 +15,6 @@
             <div id="passwordHelpBlock" class="form-text">Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.</div>
     </div>
     <button type="submit" class="btn btn-primary mb-3">Login</button> 
-    <a href="{{ url_for('register') }}" class="btn btn-primary">Register</a>
 </form>  
 
 {% endblock %}

@@ -1,8 +1,125 @@
 {% extends "base.html" %}
-{% block styles %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
-{% endblock %} 
+
 {% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow border-0 p-4">
+                <h2 class="text-center mb-4">Registration Screen</h2>
+                
+                <form action="{{ url_for('signup') }}" method="POST" enctype="multipart/form-data" id="registrationForm">
+                    
+                    <div class="text-center mb-4">
+                        <div class="rounded-circle bg-secondary d-inline-flex align-items-center justify-content-center text-white mb-3" 
+                             style="width: 120px; height: 120px; font-size: 1.2rem;">
+                            Photo
+                        </div>
+                        <input type="file" name="photo" class="form-control mb-3">
+                    </div>
 
+                    <div class="border p-4 rounded">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <input type="text" name="first_name" class="form-control" placeholder="First Name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="last_name" class="form-control" placeholder="Last Name" required>
+                            </div>
+                        </div>
 
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <input type="email" name="email" class="form-control" placeholder="Email Address" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="tel" name="phone" class="form-control" placeholder="Phone Number">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <input type="text" name="city" class="form-control" placeholder="City">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="country" class="form-control" placeholder="Country">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Password" required onkeyup="checkStrength()">
+                                <div class="progress mt-2" style="height: 5px;">
+                                    <div id="strength-bar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                </div>
+                                <small id="strength-text" class="form-text text-muted">Use 8+ characters.</small>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm Password" required onkeyup="checkMatch()">
+                                <small id="match-text" class="form-text"></small>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <textarea name="bio" class="form-control" rows="4" placeholder="Additional Information (Bio, preferences, etc.) ...."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" id="submitBtn" class="btn btn-outline-dark px-5" disabled>Register Users</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Logic to check password complexity and provide visual feedback
+function checkStrength() {
+    const password = document.getElementById('password').value;
+    const bar = document.getElementById('strength-bar');
+    const text = document.getElementById('strength-text');
+    let strength = 0;
+
+    if (password.length >= 8) strength += 25;
+    if (password.match(/[A-Z]/)) strength += 25;
+    if (password.match(/[0-9]/)) strength += 25;
+    if (password.match(/[^A-Za-z0-9]/)) strength += 25;
+
+    bar.style.width = strength + '%';
+    
+    if (strength <= 50) {
+        bar.className = 'progress-bar bg-danger';
+        text.innerText = 'Weak - include numbers/symbols.';
+    } else if (strength <= 75) {
+        bar.className = 'progress-bar bg-warning';
+        text.innerText = 'Moderate.';
+    } else {
+        bar.className = 'progress-bar bg-success';
+        text.innerText = 'Strong password!';
+    }
+    checkMatch(); // Always re-validate match when password changes
+}
+
+// Logic to ensure both passwords match before allowing registration
+function checkMatch() {
+    const password = document.getElementById('password').value;
+    const confirm = document.getElementById('confirm_password').value;
+    const matchText = document.getElementById('match-text');
+    const submitBtn = document.getElementById('submitBtn');
+
+    if (confirm.length === 0) {
+        matchText.innerText = '';
+        submitBtn.disabled = true;
+    } else if (password === confirm && password.length >= 8) {
+        matchText.innerText = 'Passwords match!';
+        matchText.className = 'form-text text-success';
+        submitBtn.disabled = false;
+    } else {
+        matchText.innerText = 'Passwords do not match or too short.';
+        matchText.className = 'form-text text-danger';
+        submitBtn.disabled = true;
+    }
+}
+</script>
 {% endblock %}
