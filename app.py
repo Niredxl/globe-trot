@@ -133,9 +133,8 @@ def test():
     return render_template('home.html')
 
 @app.route('/profile')
-def profile():
-    return "Profile page coming soon"
-
+def user_profile():
+    return render_template('user_profile.html')
 
 
 @app.route('/createtrip')
@@ -145,6 +144,10 @@ def create_trip():
 @app.route('/builditinerary')
 def build_itinerary():
     return render_template('build_itinerary.html')
+
+@app.route('/triplisting')
+def trip_listing():
+    return render_template('trip_listing.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
