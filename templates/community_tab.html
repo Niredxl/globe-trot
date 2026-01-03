@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/community_tab.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="community-wrapper">
+
+    <!-- LEFT: Main Community Feed -->
+    <div class="wireframe-container">
+
+        <!-- Header -->
+        <div class="top-bar attached">
+            <span class="brand">GlobalTrotter</span>
+            <span class="profile-circle"></span>
+        </div>
+
+        <!-- Body -->
+        <div class="container-body">
+
+            <!-- Search Controls -->
+            <div class="search-controls">
+                <input type="text" class="search-input" placeholder="Search bar .....">
+
+                <div class="control-buttons">
+                    <button>Group by</button>
+                    <button>Filter</button>
+                    <button>Sort by...</button>
+                </div>
+            </div>
+
+            <!-- Title -->
+            <h6 class="section-title">Community tab</h6>
+
+            <!-- Community Posts -->
+            <div class="community-feed">
+
+                <div class="post-row">
+                    <div class="user-circle"></div>
+                    <div class="post-card"></div>
+                </div>
+
+                <div class="post-row">
+                    <div class="user-circle"></div>
+                    <div class="post-card"></div>
+                </div>
+
+                <div class="post-row">
+                    <div class="user-circle"></div>
+                    <div class="post-card"></div>
+                </div>
+
+                <div class="post-row">
+                    <div class="user-circle"></div>
+                    <div class="post-card"></div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}
