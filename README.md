@@ -16,6 +16,7 @@
 - [ ] User Profile
 - [ ] Admin Dashboard
 
-## Derin TODO
-- [ ] Setup VENV
-- [ ] Setup Flask
+##  TODO II
+- [x] Setup VENV
+- [x] Setup Flask
+- [ ] Setup  Cookies

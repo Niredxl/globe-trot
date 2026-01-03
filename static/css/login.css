@@ -1,0 +1,11 @@
+body{
+    display:flex;
+    flex-direction: column;
+}
+.container.py-4{
+        padding-top: 3rem;
+}
+.profile-pic{
+    height: auto;
+    width: 5rem;
+}
