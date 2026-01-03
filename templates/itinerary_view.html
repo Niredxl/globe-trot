@@ -1,76 +1,109 @@
 {% extends "base.html" %}
 
 {% block styles %}
-<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/itinerary_view.css') }}">
 {% endblock %}
 
 {% block content %}
-
-<div class="wireframe-container">
-
-    <div class="top-bar attached">
-        <span class="brand">GlobalTrotter</span>
-        <span class="profile-circle"></span>
-    </div>
-
-    <div class="container-body">
-
-        <div class="search-controls">
-            <input type="text" class="search-input" placeholder="Search bar .....">
-
-            <div class="control-buttons">
-                <button>Group by</button>
-                <button>Filter</button>
-                <button>Sort by...</button>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Trip Header -->
+            <div class="text-center mb-5">
+                <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-2 mb-3">
+                    <i class="bi bi-calendar-check me-2"></i> {{ trip.start_date }} - {{ trip.end_date }}
+                </span>
+                <h1 class="fw-bold display-4 mb-3">{{ trip.location }}</h1>
+                <p class="lead text-muted mx-auto" style="max-width: 600px;">{{ trip.description }}</p>
+                <div class="d-flex justify-content-center gap-3 mt-4">
+                    <div class="d-flex align-items-center text-muted">
+                        <i class="bi bi-person-circle me-2 fs-5"></i>
+                        <span>Planned by User #{{ trip.user_id }}</span> <!-- In real app, show name -->
+                    </div>
+                </div>
             </div>
+
+            <!-- Timeline -->
+            <div class="position-relative">
+                <div class="position-absolute start-0 h-100 border-start border-2 border-light" style="left: 20px;">
+                </div>
+
+                {% for stop in stops %}
+                <div class="d-flex mb-5 position-relative">
+                    <div class="flex-shrink-0 me-4">
+                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center shadow-sm"
+                            style="width: 40px; height: 40px; z-index: 1;">
+                            <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+                            <div class="card-header bg-white border-bottom-0 pt-4 px-4 pb-0">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <h3 class="fw-bold text-primary mb-0">{{ stop.city }}</h3>
+                                    <span class="text-muted small">{{ stop.start_date }} - {{ stop.end_date }}</span>
+                                </div>
+                                <p class="text-muted mt-2">{{ stop.description }}</p>
+                            </div>
+                            <div class="card-body px-4 pb-4">
+                                {% if stop.activities %}
+                                <h6 class="text-uppercase text-muted small fw-bold mb-3">Activities</h6>
+                                {% for activity in stop.activities %}
+                                <div class="d-flex align-items-center mb-3 p-3 bg-light rounded-3">
+                                    <div class="me-3">
+                                        <div class="bg-white rounded-circle d-flex align-items-center justify-content-center shadow-sm"
+                                            style="width: 40px; height: 40px;">
+                                            <i class="bi bi-ticket-perforated text-primary"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="fw-bold mb-0">{{ activity.name }}</h6>
+                                        <span
+                                            class="badge bg-secondary bg-opacity-25 text-secondary rounded-pill py-1 px-2 small">{{
+                                            activity.category }}</span>
+                                    </div>
+                                    {% if is_owner %}
+                                    <div class="text-end">
+                                        <span class="d-block fw-bold">${{ activity.cost }}</span>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                {% endfor %}
+                                {% else %}
+                                <p class="text-muted small fst-italic mb-0">No activities scheduled.</p>
+                                {% endif %}
+                            </div>
+                            {% if is_owner %}
+                            <div class="card-footer bg-light border-0 py-3 px-4">
+                                <small class="fw-bold text-secondary">Estimated Stop Cost: ${{ stop.stop_cost }}</small>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Total Cost (Owner Only) -->
+            {% if is_owner %}
+            <div class="alert alert-info border-0 rounded-4 shadow-sm mt-5">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="fw-bold mb-0 text-primary">Total Trip Estimate</h4>
+                        <small>Includes stops budget and activity costs.</small>
+                    </div>
+                    <h2 class="fw-bold mb-0">${{ total_cost }}</h2>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if not is_owner %}
+            <div class="text-center mt-5">
+                <a href="{{ url_for('create_trip') }}" class="btn btn-primary btn-lg rounded-pill px-5 shadow">Plan Your
+                    Own Trip Like This</a>
+            </div>
+            {% endif %}
         </div>
-
-        <h4 class="page-title">Itinerary for a selected place</h4>
-
-        <div class="itinerary-header">
-            <div></div>
-            <div class="header-activity">Physical Activity</div>
-            <div class="header-expense">Expense</div>
-        </div>
-
-        <div class="day-grid">
-            <div class="day-label">Day 1</div>
-
-            <div class="activity-stack">
-                <div class="activity-box"></div>
-                <div class="arrow">↓</div>
-                <div class="activity-box"></div>
-                <div class="arrow">↓</div>
-                <div class="activity-box"></div>
-            </div>
-
-            <div class="expense-stack">
-                <div class="expense-box"></div>
-                <div class="expense-box"></div>
-                <div class="expense-box"></div>
-            </div>
-        </div>
-
-        <div class="day-grid">
-            <div class="day-label">Day 2</div>
-
-            <div class="activity-stack">
-                <div class="activity-box"></div>
-                <div class="arrow">↓</div>
-                <div class="activity-box"></div>
-                <div class="arrow">↓</div>
-                <div class="activity-box"></div>
-            </div>
-
-            <div class="expense-stack">
-                <div class="expense-box"></div>
-                <div class="expense-box"></div>
-                <div class="expense-box"></div>
-            </div>
-        </div>
-
     </div>
 </div>
-
 {% endblock %}

@@ -4,21 +4,25 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 {% endblock %}
 
-{% block content %}   
-<div id="carouselExampleAutoplaying" class="carousel slide shadow mb-4 rounded-4 overflow-hidden" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    {% for img in ['temp1.jpg', 'temp2.jpg', 'temp3.jpg'] %}
-    <div class="carousel-item {% if loop.first %}active{% endif %}">
-      <img src="{{ url_for('static', filename='img/' + img) }}" class="d-block w-100 img-fluid" alt="Travel Destination">
+{% block content %}
+<div id="carouselExampleAutoplaying" class="carousel slide shadow mb-4 rounded-4 overflow-hidden"
+    data-bs-ride="carousel">
+    <div class="carousel-inner">
+        {% for img in ['temp1.jpg', 'temp2.jpg', 'temp3.jpg'] %}
+        <div class="carousel-item {% if loop.first %}active{% endif %}">
+            <img src="{{ url_for('static', filename='img/' + img) }}" class="d-block w-100 img-fluid"
+                alt="Travel Destination">
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-  </button>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
 </div>
 
 <div class="row g-2 mb-4">
@@ -26,45 +30,69 @@
         <input type="text" class="form-control form-control-lg" placeholder="Search destinations...">
     </div>
     <div class="col-4 col-lg-2">
-        <select class="form-select form-select-lg"><option>Group</option></select>
+        <select class="form-select form-select-lg">
+            <option selected>Group By</option>
+            <option value="1">Date</option>
+            <option value="2">Destination</option>
+            <option value="3">Budget</option>
+        </select>
     </div>
     <div class="col-4 col-lg-2">
-        <select class="form-select form-select-lg"><option>Filter</option></select>
+        <select class="form-select form-select-lg">
+            <option selected>Filter By</option>
+            <option value="1">Upcoming</option>
+            <option value="2">Completed</option>
+            <option value="3">Domestic</option>
+            <option value="4">International</option>
+        </select>
     </div>
     <div class="col-4 col-lg-2">
-        <select class="form-select form-select-lg"><option>Sort</option></select>
+        <select class="form-select form-select-lg">
+            <option selected>Sort By</option>
+            <option value="1">Newest First</option>
+            <option value="2">Oldest First</option>
+            <option value="3">Cost (Low to High)</option>
+        </select>
     </div>
 </div>
 
 <section class="mb-5">
-    <h4 class="mb-3 border-bottom pb-2 fw-bold">Previous Trips</h4>
+    <h4 class="mb-3 border-bottom pb-2 fw-bold">My Trips</h4>
+    {% if trips %}
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
         {% for trip in trips %}
         <div class="col">
             <div class="card h-100 shadow-sm border-0 trip-card rounded-3 overflow-hidden">
                 <div class="ratio ratio-16x9">
-                    <img src="{{ url_for('static', filename='img/temp1.jpg')}}" 
-                         class="card-img-top img-fluid" 
-                         alt="{{ trip.name }}" 
-                         style="object-fit: cover;">
+                    <img src="{{ url_for('static', filename='img/' + trip.image) }}" class="card-img-top img-fluid"
+                        alt="{{ trip.location }}" style="object-fit: cover;"
+                        onerror="this.src='{{ url_for('static', filename='img/default1.jpg') }}'">
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title fw-bold">{{ trip.name }}</h5>
+                    <h5 class="card-title fw-bold">{{ trip.location }}</h5>
                     <p class="card-text text-muted small mb-3">
                         <i class="bi bi-calendar-event me-1"></i>
                         {{ trip.start_date }} - {{ trip.end_date }}
                     </p>
                     <div class="d-flex justify-content-between align-items-center">
                         <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2">
-                            {{ trip.stops|length }} Destinations
+                            {{ trip.stop_count }} Destinations
                         </span>
-                        <a href="{{ url_for('trips.itinerary_view', trip_id=trip.id) }}" class="btn btn-sm btn-primary">View Plan</a>
+                        <a href="{{ url_for('build_itinerary', trip_id=trip.id) }}" class="btn btn-sm btn-primary">View
+                            Plan</a>
                     </div>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
+    {% else %}
+    <div class="text-center py-5">
+        <i class="bi bi-airplane h1 text-muted"></i>
+        <p class="text-muted mt-3">You haven't planned any trips yet.</p>
+        <a href="{{ url_for('create_trip') }}" class="btn btn-outline-primary mt-2">Start Planning</a>
+    </div>
+    {% endif %}
 </section>
 
 <a href="{{ url_for('create_trip') }}" class="btn btn-primary fab-btn rounded-pill px-4 py-3 shadow-lg fw-bold">

@@ -1,76 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Globe Trotter - Personalized Travel Planning</title>
-    
+
     <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
-    
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
-        body { background-color: #f8f9fa; }
-        .navbar-brand { font-weight: bold; letter-spacing: 1px; }
+        body {
+            background-color: #f8f9fa;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .btn,
+        .nav-link {
+            font-family: 'JetBrains Mono', monospace;
+        }
     </style>
     {% block styles %}{% endblock %}
 </head>
+
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url_for('home') }}">Globe Trotter</a>
-            
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     {% if session.get('user_id') %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('home') }}">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">My Trips</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url_for('create_trip') }}" class="btn btn-primary rounded-pill px-4 shadow-sm">
-    <i class="bi bi-plus-lg"></i> Plan New Trip
-</a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('trip_listing') }}">My Trips</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('create_trip') }}" class="btn btn-primary rounded-pill px-4 shadow-sm">
+                            <i class="bi bi-plus-lg"></i> Plan New Trip
+                        </a>
+                    </li>
                     {% endif %}
                 </ul>
-                
+
                 <ul class="navbar-nav ms-auto">
 
                     {% if session.get('user_id') %}
-                        <!-- Logged-in User -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="profileDropdown"
-                            role="button" data-bs-toggle="dropdown">
-                                👤 {{ session.get('user_name') }}
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li>
-                                    <a class="dropdown-item" href="{{ url_for('user_profile') }}">
-                                        Profile Settings
-                                    </a>
-                                </li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <a class="dropdown-item text-danger" href="{{ url_for('logout') }}">
-                                        Logout
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                    <!-- Logged-in User -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
+                            data-bs-toggle="dropdown">
+                            👤 {{ session.get('user_name') }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" href="{{ url_for('user_profile') }}">
+                                    Profile Settings
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item text-danger" href="{{ url_for('logout') }}">
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     {% else %}
-                        <!-- Guest User -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('signup') }}">Register</a>
-                        </li>
+                    <!-- Guest User -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('signup') }}">Register</a>
+                    </li>
                     {% endif %}
 
                 </ul>
@@ -84,4 +107,5 @@
 
     <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </body>
+
 </html>
