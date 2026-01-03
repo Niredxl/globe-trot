@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/create_trip.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="wireframe-container">
+
+    <div class="top-bar">
+        <span class="brand">GlobalTrotter</span>
+        <span class="profile-circle"></span>
+    </div>
+
+    <div class="section">
+        <h6 class="section-title">Plan a new trip</h6>
+
+        <div class="form-row">
+            <label>Select a Place :</label>
+            <input type="text">
+        </div>
+
+        <div class="form-row">
+            <label>Start Date :</label>
+            <input type="date">
+        </div>
+
+        <div class="form-row">
+            <label>End Date :</label>
+            <input type="date">
+        </div>
+    </div>
+
+    <div class="section">
+        <h6 class="section-title">
+            Suggestion for Places to Visit / Activities to perform
+        </h6>
+
+        <div class="suggestion-grid">
+            <div class="suggestion-box"></div>
+            <div class="suggestion-box"></div>
+            <div class="suggestion-box"></div>
+            <div class="suggestion-box"></div>
+            <div class="suggestion-box"></div>
+            <div class="suggestion-box"></div>
+        </div>
+    </div>
+
+    <div class="form-actions">
+    <button type="submit" class="save-btn">Save Trip</button>
+    </div>
+
+
+</div>
+
+{% endblock %}
