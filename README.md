@@ -19,4 +19,4 @@
 ##  TODO II
 - [x] Setup VENV
 - [x] Setup Flask
-- [ ] Setup  Cookies
+- [x] Setup  Cookies

@@ -33,7 +33,7 @@
                             <a class="nav-link" href="#">My Trips</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-info" href="#">+ Plan New Trip</a>
+                            <a class="nav-link text-info" href="{{ url_for('create_trip') }}">Plan a trip</a>
                         </li>
                     {% endif %}
                 </ul>
@@ -49,7 +49,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
-                                    <a class="dropdown-item" href="{{ url_for('profile') }}">
+                                    <a class="dropdown-item" href="{{ url_for('user_profile') }}">
                                         Profile Settings
                                     </a>
                                 </li>
