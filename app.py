@@ -233,8 +233,10 @@ def build_itinerary(trip_id):
 
         conn.commit()
         conn.close()
+        print("Trip created, redirecting...")
+        return redirect(url_for('trip_listing'))
 
-        return redirect(url_for('trip_summary', trip_id=trip_id))
+
 
     return render_template('build_itinerary.html', trip_id=trip_id)
 
