@@ -1,3 +1,26 @@
+
+    .carousel-item {
+        height: 300px; /* Default for mobile */
+    }
+    
+    @media (min-width: 768px) {
+        .carousel-item {
+            height: 450px; 
+        }
+    }
+
+    .carousel-item img {
+        height: 100%;
+        object-fit: cover; 
+    }
+
+    .fab-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1050;
+    }
+
 .hero-banner {
         background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
                     url('{{ url_for("static", filename="img/banner.jpg") }}');
