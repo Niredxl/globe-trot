@@ -33,7 +33,9 @@
                             <a class="nav-link" href="#">My Trips</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-info" href="{{ url_for('create_trip') }}">Plan a trip</a>
+                            <a href="{{ url_for('create_trip') }}" class="btn btn-primary rounded-pill px-4 shadow-sm">
+    <i class="bi bi-plus-lg"></i> Plan New Trip
+</a>
                         </li>
                     {% endif %}
                 </ul>
