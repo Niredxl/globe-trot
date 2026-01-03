@@ -5,72 +5,60 @@
 {% endblock %}
 
 {% block content %}   
-<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+<div id="carouselExampleAutoplaying" class="carousel slide shadow mb-4 rounded-4 overflow-hidden" data-bs-ride="carousel">
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="{{ url_for('static', filename='img/temp1.jpg') }}" class="d-block w-100" alt="...">
+    {% for img in ['temp1.jpg', 'temp2.jpg', 'temp3.jpg'] %}
+    <div class="carousel-item {% if loop.first %}active{% endif %}">
+      <img src="{{ url_for('static', filename='img/' + img) }}" class="d-block w-100 img-fluid" alt="Travel Destination">
     </div>
-    <div class="carousel-item">
-      <img src="{{ url_for('static', filename='img/temp2.jpg') }}" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="{{ url_for('static', filename='img/temp3.jpg') }}" class="d-block w-100" alt="...">
-    </div>
+    {% endfor %}
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
   </button>
   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
   </button>
 </div>
 
-<div class="row g-2 mb-5">
-    <div class="col-md-6">
-        <input type="text" class="form-control" placeholder="Search destinations...">
+<div class="row g-2 mb-4">
+    <div class="col-12 col-lg-6">
+        <input type="text" class="form-control form-control-lg" placeholder="Search destinations...">
     </div>
-    <div class="col-md-2">
-        <select class="form-select"><option>Group by</option></select>
+    <div class="col-4 col-lg-2">
+        <select class="form-select form-select-lg"><option>Group</option></select>
     </div>
-    <div class="col-md-2">
-        <select class="form-select"><option>Filter</option></select>
+    <div class="col-4 col-lg-2">
+        <select class="form-select form-select-lg"><option>Filter</option></select>
     </div>
-    <div class="col-md-2">
-        <select class="form-select"><option>Sort by...</option></select>
+    <div class="col-4 col-lg-2">
+        <select class="form-select form-select-lg"><option>Sort</option></select>
     </div>
 </div>
 
 <section class="mb-5">
-    <h4 class="mb-3 border-bottom pb-2">Top Regional Selections</h4>
-    <div class="row row-cols-2 row-cols-md-5 g-3">
-        {% for region in ['Europe', 'Asia', 'Africa', 'Americas', 'Oceania'] %}
-        <div class="col">
-            <div class="card h-100 text-center border-0 shadow-sm trip-card">
-                <div class="card-body">
-                    <h6 class="card-title mb-0">{{ region }}</h6>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</section>
-
-<section class="mb-5">
-    <h4 class="mb-3 border-bottom pb-2">Previous Trips</h4>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <h4 class="mb-3 border-bottom pb-2 fw-bold">Previous Trips</h4>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
         {% for trip in trips %}
         <div class="col">
-            <div class="card h-100 shadow-sm border-0 trip-card">
-                <img src="{{ url_for('static', filename='img/temp1.jpg')}}" 
-                     class="card-img-top" alt="{{ trip.name }}" style="height: 180px; object-fit: cover;">
+            <div class="card h-100 shadow-sm border-0 trip-card rounded-3 overflow-hidden">
+                <div class="ratio ratio-16x9">
+                    <img src="{{ url_for('static', filename='img/temp1.jpg')}}" 
+                         class="card-img-top img-fluid" 
+                         alt="{{ trip.name }}" 
+                         style="object-fit: cover;">
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">{{ trip.name }}</h5>
-                    <p class="card-text text-muted small">{{ trip.start_date }} - {{ trip.end_date }}</p>
+                    <h5 class="card-title fw-bold">{{ trip.name }}</h5>
+                    <p class="card-text text-muted small mb-3">
+                        <i class="bi bi-calendar-event me-1"></i>
+                        {{ trip.start_date }} - {{ trip.end_date }}
+                    </p>
                     <div class="d-flex justify-content-between align-items-center">
-                        <span class="badge bg-light text-dark border">{{ trip.stops|length }} stops</span>
-                        <a href="#" class="btn btn-sm btn-outline-primary">View</a>
+                        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2">
+                            {{ trip.stops|length }} Destinations
+                        </span>
+                        <a href="{{ url_for('trips.itinerary_view', trip_id=trip.id) }}" class="btn btn-sm btn-primary">View Plan</a>
                     </div>
                 </div>
             </div>
@@ -79,7 +67,7 @@
     </div>
 </section>
 
-<a href="#" class="btn btn-primary fab-btn">
-    <i class="bi bi-plus-lg"></i> + Plan a trip
+<a href="#" class="btn btn-primary fab-btn rounded-pill px-4 py-3 shadow-lg fw-bold">
+    <i class="bi bi-plus-lg me-1"></i> Plan a trip
 </a>
 {% endblock %}
