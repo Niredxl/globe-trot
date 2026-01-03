@@ -55,8 +55,13 @@ function loadGallery(location) {
 
     const images = {
         "Paris, France": ["paris1.jpg", "paris2.jpg", "paris3.jpg"],
-        "Tokyo, Japan": ["tokyo1.jpg", "tokyo2.jpg", "tokyo3.jpg"],
-        "New York, USA": ["ny1.jpg", "ny2.jpg", "ny3.jpg"]
+        "Tokyo, Japan": ["japan1.jpg", "japan2.jpg", "japan3.jpg"],
+        "New York, USA": ["newyork1.jpg", "newyork2.jpg", "newyork3.jpg"],
+        "Dubai, UAE": ["dubai1.jpg","dubai2.jpg","dubai3.jpg"],
+        "Barcelona, Spain": ["barcelona1.jpg","barcelona2.jpg","barcelona3.jpg"],
+        "London, UK": ["london1.jpg","london2.jpg","london3.jpg"],
+        "Rome, Italy": ["rome1.jpg","rome2.jpg","rome3.jpg"],
+        "Bali, Indonesia": ["bali1.jpg","bali2.jpg","bali3.jpg"]
     };
 
     const items = images[location] || [];
