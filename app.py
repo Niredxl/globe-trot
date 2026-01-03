@@ -133,9 +133,8 @@ def test():
     return render_template('home.html')
 
 @app.route('/profile')
-def profile():
-    return "Profile page coming soon"
-
+def user_profile():
+    return render_template('user_profile.html')
 
 
 @app.route('/createtrip')
